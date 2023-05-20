@@ -28,3 +28,4 @@ functions:
           method: get
 plugins:
   - serverless-plugin-typescript
+  - serverless-offline
