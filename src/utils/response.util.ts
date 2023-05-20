@@ -20,12 +20,9 @@ export const resposeSucess = (
   };
 };
 
-export const resposeError = (
-  statusCode: number,
-  message?: Record<string, any>
-) => {
+export const resposeError = (statusCode: number, message: string) => {
   return {
     statusCode,
-    body: message ? JSON.stringify(message, null, 2) : "",
+    body: JSON.stringify({ message }, null, 2),
   };
 };
