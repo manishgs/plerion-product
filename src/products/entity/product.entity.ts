@@ -1,8 +1,8 @@
-import { Entity } from "../../../core/entity/entity";
+import { Entity } from "../../core/entity/entity";
 
 export class ProductEntity extends Entity {
   constructor() {
-    super("products");
+    super("plerion-product-api-dev");
   }
 
   public async getAll() {

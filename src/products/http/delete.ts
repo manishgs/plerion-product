@@ -1,5 +1,8 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
-import { responseNoContent, resposeError } from "../../../utils/response.util";
+import {
+  responseNoContent,
+  resposeError,
+} from "../../core/utils/response.util";
 import { ProductService } from "../services/product.service";
 
 export const handler = async (

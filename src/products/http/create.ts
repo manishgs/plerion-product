@@ -1,5 +1,5 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
-import { responseCreated, resposeError } from "../../../utils/response.util";
+import { responseCreated, resposeError } from "../../core/utils/response.util";
 import { ProductService } from "../services/product.service";
 import { IProduct } from "../types";
 

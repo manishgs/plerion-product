@@ -23,20 +23,20 @@ provider:
 
 functions:
   create-product:
-    handler: src/functions/products/http/create.handler
+    handler: src/products/http/create.handler
     events:
       - httpApi:
           path: /products
           method: post
   delete-product:
-    handler: src/functions/products/http/delete.handler
+    handler: src/products/http/delete.handler
     events:
       - httpApi:
           path: /products/{id}
           method: delete
 
   list-product:
-    handler: src/functions/products/http/list.handler
+    handler: src/products/http/list.handler
     events:
       - httpApi:
           path: /products
@@ -48,7 +48,7 @@ plugins:
 
 resources:
   Resources:
-    TodosDynamoDbTable:
+    PlerionProductTable:
       Type: 'AWS::DynamoDB::Table'
       DeletionPolicy: Retain
       Properties:
