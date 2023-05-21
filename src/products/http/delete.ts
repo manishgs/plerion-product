@@ -1,6 +1,6 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
-import { responseNoContent, resposeError } from '../../core/utils/response.util';
-import { ProductService } from '../services/product.service';
+import { responseNoContent, resposeError } from 'src/core/utils/response.util';
+import { ProductService } from 'src/products/services/product.service';
 import { validate } from 'uuid';
 
 export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {

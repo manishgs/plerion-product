@@ -1,5 +1,5 @@
-import { ProductEntity } from '../entity/product.entity';
-import { IProduct } from '../types';
+import { ProductEntity } from 'src/products/entity/product.entity';
+import { IProduct } from 'src/products/types';
 
 class ProductServiceClass {
   private readonly productEntity: ProductEntity;

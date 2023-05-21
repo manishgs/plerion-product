@@ -1,6 +1,6 @@
-import { Entity } from '../../core/entity/entity';
+import { Entity } from 'src/core/entity/base-entity';
 import { v4 as uuidv4 } from 'uuid';
-import { IProduct } from '../types';
+import { IProduct } from 'src/products/types';
 import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 
 export class ProductEntity extends Entity {

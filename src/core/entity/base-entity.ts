@@ -1,5 +1,5 @@
 import { DocumentClient } from 'aws-sdk/clients/dynamodb';
-import { IEntity } from '../types/entity';
+import { IEntity } from 'src/core/types/entity';
 
 export class Entity implements IEntity {
   readonly tableName: string;
