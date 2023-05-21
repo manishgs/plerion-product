@@ -8,10 +8,6 @@ class ProductServiceClass {
     this.productEntity = productEntity;
   }
 
-  public create(product: IProduct) {
-    console.log(product);
-  }
-
   public async getAll(): Promise<ReadonlyArray<IProduct>> {
     const res = await this.productEntity.getAll();
 
@@ -22,8 +18,12 @@ class ProductServiceClass {
     return [];
   }
 
-  public delete(id: string) {
-    return true;
+  public async create(product: IProduct) {
+    return await this.productEntity.create(product);
+  }
+
+  public async delete(productId: string) {
+    return await this.productEntity.delete(productId);
   }
 }
 

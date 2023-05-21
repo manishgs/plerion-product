@@ -10,7 +10,22 @@ export const handler = async (
     return resposeError(400, "Bad request");
   }
 
-  ProductService.create(JSON.parse(event.body) as IProduct);
+  let body;
+  try {
+    body = JSON.parse(event.body);
+  } catch (error) {
+    return resposeError(400, "Invalid Body");
+  }
+
+  if (!body) {
+    return resposeError(400, "Body can not be empty");
+  }
+
+  try {
+    await ProductService.create(body as IProduct);
+  } catch (e) {
+    return resposeError(500, "Unable to create product");
+  }
 
   return responseCreated();
 };
