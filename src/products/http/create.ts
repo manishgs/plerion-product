@@ -1,7 +1,7 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import { responseCreated, resposeError } from 'src/core/utils/response.util';
 import { ProductService } from 'src/products/services/product.service';
-import { IProduct } from 'src/products/types';
+import { ProductSchema } from 'src/products/types';
 
 export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   if (!event.body) {
@@ -15,12 +15,14 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
     return resposeError(400, 'Invalid Body');
   }
 
-  if (!body) {
-    return resposeError(400, 'Body can not be empty');
+  const parseData = ProductSchema.safeParse(body);
+
+  if (!parseData.success) {
+    return resposeError(400, 'Invalid reqeust body');
   }
 
   try {
-    await ProductService.create(body as IProduct);
+    await ProductService.create(parseData.data);
   } catch (e) {
     return resposeError(500, 'Unable to create product');
   }

@@ -1,5 +1,6 @@
 import { ProductEntity } from 'src/products/entity/product.entity';
-import { IProduct } from 'src/products/types';
+import { IProduct, ProductSchema } from 'src/products/types';
+import { z } from 'zod';
 
 class ProductServiceClass {
   private readonly productEntity: ProductEntity;
@@ -12,7 +13,12 @@ class ProductServiceClass {
     const res = await this.productEntity.getAll();
 
     if (res?.Items) {
-      return res.Items as unknown as ReadonlyArray<IProduct>;
+      const parsedData = z.array(ProductSchema).safeParse(res.Items);
+      if (!parsedData.success) {
+        return [];
+      }
+
+      return parsedData.data;
     }
 
     return [];
