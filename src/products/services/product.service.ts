@@ -1,5 +1,5 @@
-import { ProductEntity } from "../entity/product.entity";
-import { IProduct } from "../types";
+import { ProductEntity } from '../entity/product.entity';
+import { IProduct } from '../types';
 
 class ProductServiceClass {
   private readonly productEntity: ProductEntity;
@@ -12,7 +12,7 @@ class ProductServiceClass {
     const res = await this.productEntity.getAll();
 
     if (res?.Items) {
-      return res.Items as any;
+      return res.Items as unknown as ReadonlyArray<IProduct>;
     }
 
     return [];

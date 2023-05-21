@@ -1,5 +1,5 @@
-import { DocumentClient } from "aws-sdk/clients/dynamodb";
-import { IEntity } from "../types/entity";
+import { DocumentClient } from 'aws-sdk/clients/dynamodb';
+import { IEntity } from '../types/entity';
 
 export class Entity implements IEntity {
   readonly tableName: string;
@@ -8,7 +8,7 @@ export class Entity implements IEntity {
 
   constructor(tableName: string) {
     this.client = new DocumentClient({
-      region: "ap-southeast-2",
+      region: 'ap-southeast-2'
     });
     this.tableName = tableName;
   }

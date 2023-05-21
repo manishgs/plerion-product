@@ -1,11 +1,11 @@
-import { Entity } from "../../core/entity/entity";
-import { v4 as uuidv4 } from "uuid";
-import { IProduct } from "../types";
-import { DocumentClient } from "aws-sdk/clients/dynamodb";
+import { Entity } from '../../core/entity/entity';
+import { v4 as uuidv4 } from 'uuid';
+import { IProduct } from '../types';
+import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 
 export class ProductEntity extends Entity {
   constructor() {
-    super("plerion-product-api-dev");
+    super('plerion-product-api-dev');
   }
 
   public async getAll() {
@@ -22,8 +22,8 @@ export class ProductEntity extends Entity {
         name: product.name,
         description: product.description,
         price: product.price,
-        imageUrl: product.imageUrl,
-      },
+        imageUrl: product.imageUrl
+      }
     };
 
     return await this.client.put(params).promise();
@@ -32,7 +32,7 @@ export class ProductEntity extends Entity {
   public async delete(productId: string) {
     const params: DocumentClient.DeleteItemInput = {
       TableName: this.tableName,
-      Key: { id: productId },
+      Key: { id: productId }
     };
 
     return await this.client.delete(params).promise();
