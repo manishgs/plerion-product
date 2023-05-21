@@ -1,11 +1,24 @@
-import { Product } from "../../../types/product";
+import { ProductEntity } from "../entity/product.entity";
+import { IProduct } from "../types";
 
 class ProductServiceClass {
-  public create(product: Product) {
+  private readonly productEntity: ProductEntity;
+
+  constructor(productEntity: ProductEntity) {
+    this.productEntity = productEntity;
+  }
+
+  public create(product: IProduct) {
     console.log(product);
   }
 
-  public getAll(): ReadonlyArray<Product> {
+  public async getAll(): Promise<ReadonlyArray<IProduct>> {
+    const res = await this.productEntity.getAll();
+
+    if (res?.Items) {
+      return res.Items as any;
+    }
+
     return [];
   }
 
@@ -14,4 +27,4 @@ class ProductServiceClass {
   }
 }
 
-export const ProductService = new ProductServiceClass();
+export const ProductService = new ProductServiceClass(new ProductEntity());
