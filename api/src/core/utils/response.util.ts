@@ -26,3 +26,10 @@ export const resposeError = (statusCode: number, message: string): APIGatewayPro
     body: JSON.stringify({ message }, null, 2)
   };
 };
+
+export const resposeValidationError = (errors: Record<string, string>): APIGatewayProxyResult => {
+  return {
+    statusCode: 422,
+    body: JSON.stringify({ errors }, null, 2)
+  };
+};

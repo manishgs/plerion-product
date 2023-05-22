@@ -1,12 +1,15 @@
 import { InputHTMLAttributes } from "react";
-import { FieldError } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 
 interface Props extends InputHTMLAttributes<HTMLTextAreaElement> {
   label: string;
-  error?: FieldError;
+  name: string;
 }
 
-export const TextArea = ({ label, error, ...rest }: Props) => {
+export const TextArea = ({ label, name, ...rest }: Props) => {
+  const methods = useFormContext();
+  const error = methods.formState.errors[name];
+
   return (
     <div className="mb-4">
       <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
@@ -19,11 +22,14 @@ export const TextArea = ({ label, error, ...rest }: Props) => {
             : "border-gray-200 focus:border-gray-500"
         } 
              rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white `}
-        type={rest.name ?? "text"}
+        {...methods.register(name)}
         {...rest}
+        rows={5}
       />
       {error?.message && (
-        <p className="text-red-500 text-xs italic">{error?.message}</p>
+        <p className="text-red-500 text-xs italic">
+          {error?.message as string}
+        </p>
       )}
     </div>
   );
