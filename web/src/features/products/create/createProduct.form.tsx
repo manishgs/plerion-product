@@ -6,9 +6,9 @@ import {
 } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ProductInputs, ProductSchema } from "./createProduct.schema";
-import { InputText } from "../../ui/form/input";
-import { TextArea } from "../../ui/form/textarea";
-import { Button } from "../../ui/button";
+import { InputText } from "../../../ui/form/input";
+import { TextArea } from "../../../ui/form/textarea";
+import { Button } from "../../../ui/button";
 
 interface Props {
   onSubmit: SubmitHandler<ProductInputs>;

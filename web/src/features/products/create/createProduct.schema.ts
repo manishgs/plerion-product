@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const ProductSchema = z.object({
-  name: z.string().min(1, { message: "This field is required" }).max(10, {
+  name: z.string().min(1, { message: "This field is required" }).max(125, {
     message: "The name must not exceed a maximum of 125 characters",
   }),
   description: z.string().min(1, { message: "This field is required" }),
@@ -14,3 +14,4 @@ export const ProductSchema = z.object({
 });
 
 export type ProductInputs = z.infer<typeof ProductSchema>;
+export type Product = ProductInputs & { id: string };
