@@ -19,7 +19,14 @@ export default function CreateProductPage() {
   return (
     <ProductWrapper
       left={<h1 className="text-2xl">Products</h1>}
-      right={<Link to="/">Back</Link>}
+      right={
+        <Link
+          className="bg-lime-500 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          to="/"
+        >
+          Back
+        </Link>
+      }
     >
       <FormProvider {...methods}>
         <CreateProductForm

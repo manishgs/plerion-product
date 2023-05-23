@@ -17,7 +17,7 @@ export const ProductWrapper = ({
         <div className="float-right">{right}</div>
         {left}
       </div>
-      <div className="bg-white p-8">{children}</div>
+      <div className="bg-white rounded-md p-8">{children}</div>
     </div>
   );
 };
