@@ -10,3 +10,4 @@ jspm_packages
 scripts/
 
 yarn-error.log
+.env

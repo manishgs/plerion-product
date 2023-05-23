@@ -2,10 +2,11 @@ import { Entity } from 'src/core/entity/base-entity';
 import { v4 as uuidv4 } from 'uuid';
 import { IProduct, ProductStatus } from 'src/products/types';
 import { DocumentClient } from 'aws-sdk/clients/dynamodb';
+import { APP_ENV } from 'src/core/config';
 
 export class ProductEntity extends Entity {
   constructor() {
-    super('plerion-product-dev');
+    super(`plerion-product-${APP_ENV}`);
   }
 
   public async paginate(cursor?: string) {
