@@ -23,8 +23,7 @@ export class ProductEntity extends Entity {
     };
 
     if (cursor) {
-      const [id, createdAt] = cursor.split('$');
-      params.ExclusiveStartKey = { id, createdAt };
+      params.ExclusiveStartKey = { id: cursor };
     }
 
     return await this.client.scan(params).promise();
