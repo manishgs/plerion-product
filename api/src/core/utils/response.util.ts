@@ -20,7 +20,9 @@ export const resposeSucess = (statusCode: number, data?: Record<string, any>): A
   };
 };
 
-export const resposeError = (statusCode: number, message: string): APIGatewayProxyResult => {
+export const resposeError = (statusCode: number, message: string, e?: unknown): APIGatewayProxyResult => {
+  // eslint-disable-next-line no-console
+  console.log(e);
   return {
     statusCode,
     body: JSON.stringify({ message }, null, 2)

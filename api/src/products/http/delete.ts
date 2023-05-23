@@ -11,7 +11,7 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
   try {
     await ProductService.delete(event.pathParameters.id);
   } catch (e) {
-    return resposeError(500, 'Unable to delete product');
+    return resposeError(500, 'Unable to delete product', e);
   }
 
   return responseNoContent();

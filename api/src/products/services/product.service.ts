@@ -23,7 +23,10 @@ class ProductServiceClass {
         return { items: [] };
       }
 
-      return { items: parsedData.data, cursor: res.LastEvaluatedKey?.id };
+      const cursor = res.LastEvaluatedKey?.id
+        ? res.LastEvaluatedKey?.id + '$' + res.LastEvaluatedKey?.createdAt
+        : undefined;
+      return { items: parsedData.data, cursor };
     }
 
     return { items: [] };

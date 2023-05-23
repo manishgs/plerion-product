@@ -7,6 +7,6 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
     const products = await ProductService.paginate(event.queryStringParameters?.cursor);
     return responseOK(products);
   } catch (e) {
-    return resposeError(500, 'Unable to fetch product');
+    return resposeError(500, 'Unable to fetch product', e);
   }
 };

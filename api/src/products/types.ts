@@ -13,7 +13,8 @@ export const ProductSchema = z.object({
   description: z.string().min(1, { message: 'This field is required' }),
   price: z.number().positive().min(1, { message: 'This field is required' }).max(9999999),
   imageUrl: z.string().min(1, { message: 'This field is required' }).url(),
-  status: z.nativeEnum(ProductStatus).optional()
+  status: z.nativeEnum(ProductStatus).optional(),
+  createdAt: z.string().optional()
 });
 
 export type IProduct = z.infer<typeof ProductSchema>;

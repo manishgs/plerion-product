@@ -5,7 +5,7 @@ import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 
 export class ProductEntity extends Entity {
   constructor() {
-    super('plerion-product-api-dev');
+    super('plerion-product-dev');
   }
 
   public async paginate(cursor?: string) {
@@ -22,7 +22,8 @@ export class ProductEntity extends Entity {
     };
 
     if (cursor) {
-      params.ExclusiveStartKey = { id: cursor };
+      const [id, createdAt] = cursor.split('$');
+      params.ExclusiveStartKey = { id, createdAt };
     }
 
     return await this.client.scan(params).promise();
@@ -38,7 +39,7 @@ export class ProductEntity extends Entity {
         price: product.price,
         imageUrl: product.imageUrl,
         status: ProductStatus.PUBLISHED,
-        createdAt: Date.now()
+        createdAt: new Date().toISOString()
       }
     };
 

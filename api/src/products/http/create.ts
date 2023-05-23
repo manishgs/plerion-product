@@ -25,7 +25,7 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
   try {
     await ProductService.create(parseData.data);
   } catch (e) {
-    return resposeError(500, 'Unable to create product');
+    return resposeError(500, 'Unable to create product', e);
   }
 
   return responseCreated();
