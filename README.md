@@ -8,6 +8,7 @@ HTTP API with Node.js and Typescript running on AWS Lambda and API Gateway using
 
 ```
 cd api
+cp .env.example .env
 ```
 
 **Install Dependencies**
@@ -22,12 +23,19 @@ yarn install
 yarn dev
 ```
 
+**Deploy**
+
+```
+yarn deploy
+```
+
 <hr/>
 
 ## Setup Web
 
 ```
 cd web
+cp .env.example .env
 ```
 
 **Install Dependencies**
