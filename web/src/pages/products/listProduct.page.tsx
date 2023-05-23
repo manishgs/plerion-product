@@ -4,6 +4,7 @@ import { Item } from "../../features/products/list/productItem";
 import { ProductWrapper } from "../../features/products/list/productWrapper";
 import { useListProduct } from "../../features/products/list/useListProduct";
 import { Button } from "../../ui/button";
+import { Loading } from "../../ui/loading";
 
 export const ListProductPage = () => {
   const {
@@ -46,7 +47,7 @@ export const ListProductPage = () => {
       <div className="mx-auto grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
         {isError && <div>{JSON.stringify(error)}</div>}
 
-        {isLoading && <div>Loading...</div>}
+        {isLoading && <Loading repeat={3} />}
 
         {!isLoading && renderItems(products)}
       </div>
