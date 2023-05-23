@@ -21,6 +21,7 @@ export const usePostProduct = (methods: UseFormReturn<ProductInputs>) => {
         if (res.status === 201) {
           setSuccess(true);
           methods.reset();
+          return;
         }
         return res ? res.json() : null;
       })

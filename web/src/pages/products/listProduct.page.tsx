@@ -7,15 +7,8 @@ import { Button } from "../../ui/button";
 import { Loading } from "../../ui/loading";
 
 export const ListProductPage = () => {
-  const {
-    products,
-    isError,
-    error,
-    isLoading,
-    isFetchingNextPage,
-    loadMore,
-    hasNextPage,
-  } = useListProduct();
+  const { products, isLoading, isFetchingNextPage, loadMore, hasNextPage } =
+    useListProduct();
 
   const renderItems = (products: readonly Product[]) => {
     if (!products || !products.length) {
@@ -25,6 +18,7 @@ export const ListProductPage = () => {
     return products.map((product) => (
       <Item
         key={product.id}
+        id={product.id}
         title={product.name}
         price={product.price}
         imageUrl={product.imageUrl}
@@ -45,8 +39,6 @@ export const ListProductPage = () => {
       }
     >
       <div className="mx-auto grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-        {isError && <div>{JSON.stringify(error)}</div>}
-
         {isLoading && <Loading repeat={3} />}
 
         {!isLoading && renderItems(products)}
@@ -57,8 +49,9 @@ export const ListProductPage = () => {
           <Button
             isLoading={isLoading || isFetchingNextPage}
             onClick={loadMore}
-            label="Load More"
-          />
+          >
+            Load More
+          </Button>
         </div>
       )}
     </ProductWrapper>

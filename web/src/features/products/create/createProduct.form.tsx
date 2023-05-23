@@ -21,7 +21,9 @@ export default function CreateProductForm({
       <TextArea label="Description" name="description" />
       <InputText label="price" name="price" />
       <InputText label="imageUrl" name="imageUrl" />
-      <Button isLoading={isLoading} label="Submit" type="submit" />
+      <Button isLoading={isLoading} type="submit">
+        Submit
+      </Button>
     </form>
   );
 }

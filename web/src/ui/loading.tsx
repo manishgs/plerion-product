@@ -1,7 +1,8 @@
 export const Loading = ({ repeat = 1 }) => {
-  const loading = Array.from(Array(repeat)).map(() => {
+  const loading = Array.from(Array(repeat)).map((_, i) => {
     return (
       <div
+        key={i}
         role="status"
         className="space-y-8 animate-pulse md:space-y-0 md:space-x-8 md:items-center"
       >
