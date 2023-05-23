@@ -22,10 +22,7 @@ export default function CreateProductForm({
   onSubmit,
 }: Props) {
   return (
-    <form
-      className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-      onSubmit={methods.handleSubmit(onSubmit)}
-    >
+    <form className="m-6" onSubmit={methods.handleSubmit(onSubmit)}>
       <InputText label="Product Name" name="name" />
       <TextArea label="Description" name="description" />
       <InputText label="price" name="price" type="number" />

@@ -1,5 +1,10 @@
 import { z } from 'zod';
 
+export enum ProductStatus {
+  DRAFT = 'draft',
+  PUBLISHED = 'published'
+}
+
 export const ProductSchema = z.object({
   id: z.string().uuid().optional(),
   name: z.string().min(1, { message: 'This field is required' }).max(125, {
@@ -7,7 +12,8 @@ export const ProductSchema = z.object({
   }),
   description: z.string().min(1, { message: 'This field is required' }),
   price: z.number().positive().min(1, { message: 'This field is required' }).max(9999999),
-  imageUrl: z.string().min(1, { message: 'This field is required' }).url()
+  imageUrl: z.string().min(1, { message: 'This field is required' }).url(),
+  status: z.nativeEnum(ProductStatus).optional()
 });
 
 export type IProduct = z.infer<typeof ProductSchema>;

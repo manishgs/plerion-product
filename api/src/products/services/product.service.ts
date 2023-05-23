@@ -2,6 +2,11 @@ import { ProductEntity } from 'src/products/entity/product.entity';
 import { IProduct, ProductSchema } from 'src/products/types';
 import { z } from 'zod';
 
+interface Paginate<T> {
+  items: ReadonlyArray<T>;
+  cursor?: string;
+}
+
 class ProductServiceClass {
   private readonly productEntity: ProductEntity;
 
@@ -9,19 +14,19 @@ class ProductServiceClass {
     this.productEntity = productEntity;
   }
 
-  public async getAll(): Promise<ReadonlyArray<IProduct>> {
-    const res = await this.productEntity.getAll();
+  public async paginate(cursor?: string): Promise<Paginate<IProduct>> {
+    const res = await this.productEntity.paginate(cursor);
 
     if (res?.Items) {
       const parsedData = z.array(ProductSchema).safeParse(res.Items);
       if (!parsedData.success) {
-        return [];
+        return { items: [] };
       }
 
-      return parsedData.data;
+      return { items: parsedData.data, cursor: res.LastEvaluatedKey?.id };
     }
 
-    return [];
+    return { items: [] };
   }
 
   public async create(product: IProduct) {

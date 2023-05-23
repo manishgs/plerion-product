@@ -1,16 +1,48 @@
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 
 export const useListProduct = () => {
-  const { data, error, isError, isLoading } = useQuery({
-    queryKey: ["products"],
-    queryFn: () =>
-      fetch("http://localhost:3000/products").then((res) => res.json()),
-  });
-
-  return {
+  const {
+    isLoading,
+    data,
+    isFetchingNextPage,
+    refetch,
+    hasNextPage,
     isError,
     error,
-    products: data,
+    fetchNextPage,
+  } = useInfiniteQuery(
+    ["products"],
+    ({ pageParam }) => {
+      const query = pageParam ? `?cursor=${pageParam}` : "";
+      return fetch(`http://localhost:3000/products${query}`).then((res) =>
+        res.json()
+      );
+    },
+    {
+      getNextPageParam: (data) => {
+        return data?.cursor ?? undefined;
+      },
+      refetchOnWindowFocus: false,
+    }
+  );
+
+  const loadMore = () => {
+    if (hasNextPage) {
+      fetchNextPage();
+    }
+  };
+
+  const products = data?.pages?.map((page) => page.items || []).flat() || [];
+
+  return {
     isLoading,
+    data,
+    isFetchingNextPage,
+    refetch,
+    hasNextPage,
+    isError,
+    error,
+    loadMore,
+    products,
   };
 };

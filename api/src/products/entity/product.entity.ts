@@ -1,6 +1,6 @@
 import { Entity } from 'src/core/entity/base-entity';
 import { v4 as uuidv4 } from 'uuid';
-import { IProduct } from 'src/products/types';
+import { IProduct, ProductStatus } from 'src/products/types';
 import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 
 export class ProductEntity extends Entity {
@@ -8,8 +8,22 @@ export class ProductEntity extends Entity {
     super('plerion-product-api-dev');
   }
 
-  public async getAll() {
-    const params = { TableName: this.tableName };
+  public async paginate(cursor?: string) {
+    const params: DocumentClient.ScanInput = {
+      TableName: this.tableName,
+      Limit: 3,
+      FilterExpression: '#productStatus = :value',
+      ExpressionAttributeValues: {
+        ':value': ProductStatus.PUBLISHED
+      },
+      ExpressionAttributeNames: {
+        '#productStatus': 'status'
+      }
+    };
+
+    if (cursor) {
+      params.ExclusiveStartKey = { id: cursor };
+    }
 
     return await this.client.scan(params).promise();
   }
@@ -22,7 +36,9 @@ export class ProductEntity extends Entity {
         name: product.name,
         description: product.description,
         price: product.price,
-        imageUrl: product.imageUrl
+        imageUrl: product.imageUrl,
+        status: ProductStatus.PUBLISHED,
+        createdAt: Date.now()
       }
     };
 

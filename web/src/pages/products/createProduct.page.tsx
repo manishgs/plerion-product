@@ -7,12 +7,9 @@ import CreateProductForm from "../../features/products/create/createProduct.form
 import { zodResolver } from "@hookform/resolvers/zod";
 import { usePostProduct } from "../../features/products/create/usePostProduct";
 import { Link } from "react-router-dom";
+import { ProductWrapper } from "../../features/products/list/productWrapper";
 
-interface Props {
-  readonly title: string;
-}
-
-export default function CreateProductPage({ title }: Props) {
+export default function CreateProductPage() {
   const methods = useForm<ProductInputs>({
     resolver: zodResolver(ProductSchema),
   });
@@ -20,20 +17,17 @@ export default function CreateProductPage({ title }: Props) {
   const { onSubmit, isLoading } = usePostProduct(methods);
 
   return (
-    <div className="w-full h-full">
-      <div className="max-w-xl m-auto mt-20">
-        <Link to="/" className="uppercase text-sm">
-          Back
-        </Link>
-        <h1 className="text-3xl mb-6">{title}</h1>
-        <FormProvider {...methods}>
-          <CreateProductForm
-            isLoading={isLoading}
-            methods={methods}
-            onSubmit={onSubmit}
-          />
-        </FormProvider>
-      </div>
-    </div>
+    <ProductWrapper
+      left={<h1 className="text-2xl">Products</h1>}
+      right={<Link to="/">Back</Link>}
+    >
+      <FormProvider {...methods}>
+        <CreateProductForm
+          isLoading={isLoading}
+          methods={methods}
+          onSubmit={onSubmit}
+        />
+      </FormProvider>
+    </ProductWrapper>
   );
 }
