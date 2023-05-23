@@ -1,6 +1,5 @@
 import { InputHTMLAttributes } from "react";
 import { useFormContext } from "react-hook-form";
-import { number } from "zod";
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   label: string;

@@ -14,7 +14,7 @@ export default function CreateProductPage() {
     resolver: zodResolver(ProductSchema),
   });
 
-  const { onSubmit, isLoading } = usePostProduct(methods);
+  const { onSubmit, isSuccess, isLoading } = usePostProduct(methods);
 
   return (
     <ProductWrapper
@@ -29,6 +29,15 @@ export default function CreateProductPage() {
       }
     >
       <FormProvider {...methods}>
+        {isSuccess && (
+          <div
+            className="p-4 m-6 text-sm text-green-800 rounded-lg bg-green-50 "
+            role="alert"
+          >
+            Product created successfully
+          </div>
+        )}
+
         <CreateProductForm
           isLoading={isLoading}
           methods={methods}

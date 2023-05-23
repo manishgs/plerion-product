@@ -7,15 +7,18 @@ export const usePostProduct = (methods: UseFormReturn<ProductInputs>) => {
   const queryClient = useQueryClient();
 
   const [isLoading, setLoading] = useState(false);
+  const [isSuccess, setSuccess] = useState(false);
 
   const postProduct = async (data: ProductInputs) => {
     setLoading(true);
+    setSuccess(false);
     return fetch("http://localhost:3000/products", {
       method: "POST",
       body: JSON.stringify(data),
     })
       .then((res) => {
         if (res.status === 201) {
+          setSuccess(true);
           methods.reset();
         }
         return res ? res.json() : null;
@@ -45,6 +48,7 @@ export const usePostProduct = (methods: UseFormReturn<ProductInputs>) => {
   };
 
   return {
+    isSuccess,
     onSubmit,
     isLoading,
   };
