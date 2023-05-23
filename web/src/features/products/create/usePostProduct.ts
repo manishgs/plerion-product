@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { SubmitHandler, UseFormReturn } from "react-hook-form";
+import { API_URL } from "../../../config";
 import { ProductInputs } from "./createProduct.schema";
 
 export const usePostProduct = (methods: UseFormReturn<ProductInputs>) => {
@@ -12,7 +13,7 @@ export const usePostProduct = (methods: UseFormReturn<ProductInputs>) => {
   const postProduct = async (data: ProductInputs) => {
     setLoading(true);
     setSuccess(false);
-    return fetch("http://localhost:3000/products", {
+    return fetch(`${API_URL}/products`, {
       method: "POST",
       body: JSON.stringify(data),
     })

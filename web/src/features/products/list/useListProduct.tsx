@@ -1,4 +1,5 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
+import { API_URL } from "../../../config";
 
 export const useListProduct = () => {
   const {
@@ -14,9 +15,7 @@ export const useListProduct = () => {
     ["products"],
     ({ pageParam }) => {
       const query = pageParam ? `?cursor=${pageParam}` : "";
-      return fetch(`http://localhost:3000/products${query}`).then((res) =>
-        res.json()
-      );
+      return fetch(`${API_URL}/products${query}`).then((res) => res.json());
     },
     {
       getNextPageParam: (data) => {
