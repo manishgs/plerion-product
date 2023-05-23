@@ -6,10 +6,12 @@ export const ProductSchema = z.object({
   }),
   description: z.string().min(1, { message: "This field is required" }),
   price: z
-    .number()
-    .positive()
-    .min(1, { message: "This field is required" })
-    .max(9999999),
+    .string()
+    .refine((value) => {
+      const parsedValue = parseFloat(value);
+      return !isNaN(parsedValue) && parsedValue > 0 && parsedValue < 99999;
+    }, "Invalid price")
+    .transform(Number),
   imageUrl: z.string().min(1, { message: "This field is required" }).url(),
 });
 

@@ -25,7 +25,7 @@ export default function CreateProductForm({
     <form className="m-6" onSubmit={methods.handleSubmit(onSubmit)}>
       <InputText label="Product Name" name="name" />
       <TextArea label="Description" name="description" />
-      <InputText label="price" name="price" type="number" />
+      <InputText label="price" name="price" />
       <InputText label="imageUrl" name="imageUrl" />
       <Button isLoading={isLoading} label="Submit" type="submit" />
     </form>

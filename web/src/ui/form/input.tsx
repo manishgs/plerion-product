@@ -22,10 +22,7 @@ export const InputText = ({ label, name, ...rest }: Props) => {
         } 
              rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white `}
         type={rest.type ?? "text"}
-        {...methods.register(
-          name,
-          rest.type === "number" ? { valueAsNumber: true } : {}
-        )}
+        {...methods.register(name)}
         {...rest}
       />
       {error?.message && (
